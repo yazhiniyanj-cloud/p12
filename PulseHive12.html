@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse Hive - Connected Heart Health</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fff6df; color: #3b2a14; margin: 0; }
+        header { background-color: #3b2a14; color: #ffc233; text-align: center; padding: 20px; }
+        nav { background-color: #f5a623; padding: 15px; text-align: center; }
+        nav a { color: #3b2a14; margin: 15px; text-decoration: none; font-weight: bold; }
+        section { background-color: white; margin: 20px; padding: 20px; border-radius: 8px; }
+        h2 { color: #b3261e; }
+        input, textarea { width: 90%; padding: 10px; margin: 10px; }
+        button { background-color: #d9372b; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #8f1f17; }
+        footer { background-color: #3b2a14; color: #ffc233; text-align: center; padding: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>PULSE HIVE</h1>
+        <p>Where Every Heartbeat Connects the Community</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#reports">Pulse Reports</a>
+    </nav>
+
+    <section id="home">
+        <h2>Welcome to Pulse Hive</h2>
+        <p>
+            Pulse Hive helps people track their heart rate, understand
+            their health trends and stay motivated together.
+        </p>
+    </section>
+
+    <section id="features">
+        <h2>Features</h2>
+
+        <h3>Live Pulse Tracking</h3>
+        <p>Records heart rate readings and shows how they change over time.</p>
+
+        <h3>Hive Communities</h3>
+        <p>Lets members join groups and share healthy habits.</p>
+
+        <h3>Health Insights</h3>
+        <p>Turns pulse data into simple weekly summaries.</p>
+    </section>
+
+    <section id="reports">
+        <h2>Hive Data Management</h2>
+
+        <h3>Latest Pulse Report</h3>
+        <button onclick="loadData()">Load Report</button>
+        <p id="result"></p>
+
+        <h3>Share a Pulse Report</h3>
+        <input type="text" id="name" placeholder="Report Title">
+        <input type="text" id="member" placeholder="Member Name">
+        <textarea id="description" placeholder="Report Description"></textarea>
+        <button onclick="submitData()">Share Report</button>
+        <p id="message"></p>
+    </section>
+
+    <footer>
+        <p>© 2026 Pulse Hive | Healthier Together</p>
+    </footer>
+
+    <script>
+        // 1. JavaScript Function
+        function loadData() {
+            // 2. API Call
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = "Pulse Report: " + data.title;
+                console.log(data);
+            })
+            .catch(error => {
+                document.getElementById("result").textContent = "Could not load the report. Check your connection and try again.";
+                console.log("Error:", error);
+            });
+        }
+
+        // 3. Input Validation
+        function submitData() {
+            let name = document.getElementById("name").value;
+            let member = document.getElementById("member").value;
+            let description = document.getElementById("description").value;
+
+            // 4. Test and Debugging
+            if (name.trim() == "" || member.trim() == "" || description.trim() == "") {
+                document.getElementById("message").textContent = "Please fill all the fields.";
+                return;
+            }
+
+            document.getElementById("message").textContent = "Pulse report shared with the hive!";
+            console.log("Pulse report submitted");
+        }
+    </script>
+</body>
+</html>
